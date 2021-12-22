@@ -1,0 +1,73 @@
+<div class="add-page">
+  <h4>{{ No ? "Edit" : "Add" }} User</h4>
+  <form [formGroup]="UserForm" (ngSubmit)="saveUser()" autocomplete="off">
+    <div fxLayout="row">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>No</mat-label>
+        <input
+          matInput
+          disabled
+          required
+          placeholder="No"
+          [value]="UserForm.value.No"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          required
+          maxlength="100"
+          placeholder="Name"
+          formControlName="Name"
+          (change)="getAvatar()"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Age</mat-label>
+        <input
+          type="number"
+          matInput
+          size="3"
+          required
+          placeholder="Age"
+          formControlName="Age"
+          (keyup)="checkAge()"
+          (change)="checkAge(); getAvatar()"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Status</mat-label>
+        <input
+          matInput
+          disabled
+          required
+          placeholder="Status"
+          [value]="UserForm.value.Status"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" class="mb10">
+      <mat-label class="w-100 d-block">Avatar</mat-label>
+      <img
+        *ngIf="UserForm.value.Avatar"
+        [src]="getSafeHtml(UserForm.value.Avatar)"
+        width="30"
+      />
+    </div>
+    <div fxLayout="row">
+      <button type="submit" mat-raised-button color="primary" class="mr-10">
+        Save
+      </button>
+      <button type="button" routerLink="/" mat-raised-button color="accent">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
