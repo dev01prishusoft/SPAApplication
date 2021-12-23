@@ -5,14 +5,9 @@ import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/avatars-male-sprites';
 import axios from "axios";
 import { DomSanitizer } from '@angular/platform-browser';
+import { User } from '../user';
 
-export interface User {
-  No: number;
-  Avatar: string;
-  Name: string;
-  Age: number;
-  Status: string;
-}
+
 
 @Component({
   selector: 'app-add',
@@ -22,7 +17,7 @@ export interface User {
 export class AddComponent implements OnInit {
 
   UserForm: FormGroup;
-  users:User[] = [];
+  users: User[] = [];
   No: number;
   constructor(private fb: FormBuilder, private sanitized: DomSanitizer, private router: Router, private route: ActivatedRoute) {
     this.UserForm = this.fb.group({

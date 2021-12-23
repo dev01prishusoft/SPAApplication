@@ -1,19 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-
-
-export interface User {
-  No: number;
-  Avatar: string;
-  Name: string;
-  Age: number;
-  Status: string;
-}
-
+import { User } from '../user';
 
 @Component({
   selector: 'app-list',
@@ -26,7 +16,7 @@ export class ListComponent implements OnInit {
   displayedColumns: string[] = ['No', 'Avatar', 'Name', 'Age', 'Status', 'Action'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private router: Router, private sanitized: DomSanitizer) {
+  constructor(private sanitized: DomSanitizer) {
     if (localStorage.getItem('users')) {
       this.users = new MatTableDataSource(JSON.parse(localStorage.getItem('users')));
     }
@@ -45,7 +35,6 @@ export class ListComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-
       if (confirm('Are you sure to delete this user?')) {
         const users = this.users.data.filter((item) => { return (item.No != user.No) });
         this.users = new MatTableDataSource(users);
